@@ -1,6 +1,7 @@
 import { Box, Container, CssBaseline, Grid, makeStyles } from "@material-ui/core"
 import Header from "../../componets/header"
 import GridTask from "../../componets/gridTask"
+import ListCardTask from "../../componets/listCardTask"
 
 const useStyles = makeStyles({
     paddingTop10: {
@@ -36,8 +37,10 @@ function PageMain(){
                     <Grid item xs={12} sm={4} className={classes.height100}>
                         <GridTask
                             title={"A fazer"}
+                            task={<ListCardTask />}
                             onHandleClick={addTask}
                         />
+                            
                     </Grid>
                     <Grid item xs={12} sm={4} className={classes.height100}>
                         <GridTask

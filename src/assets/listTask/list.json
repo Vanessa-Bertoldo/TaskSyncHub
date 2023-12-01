@@ -1,0 +1,110 @@
+[
+    {
+        "id": 1,
+        "desc": "Exercitar faz bem para a mente e o corpo, por isso nunca se esqueça",
+        "title": "Estudar python",
+        "status": "A fazer"
+    },
+    {
+        "id": 2,
+        "desc": "Exercitar faz bem para a mente e o corpo, por isso nunca se esqueça",
+        "title": "ir a academia",
+        "status": "A fazer"
+    },
+    {
+        "id": 1,
+        "desc": "Exercitar faz bem para a mente e o corpo, por isso nunca se esqueça",
+        "title": "praticar violão",
+        "status": "Concluido"
+    },
+    {
+        "id": 3,
+        "desc": "Aprender novas línguas é uma excelente maneira de expandir horizontes",
+        "title": "Estudar francês",
+        "status": "A fazer"
+    },
+    {
+        "id": 4,
+        "desc": "A leitura diária estimula a mente e amplia o conhecimento",
+        "title": "Ler livro de filosofia",
+        "status": "A fazer"
+    },
+    {
+        "id": 5,
+        "desc": "Aprender a cozinhar é uma habilidade valiosa para a vida",
+        "title": "Fazer curso de culinária",
+        "status": "A fazer"
+    },
+    {
+        "id": 6,
+        "desc": "Explorar trilhas na natureza é uma ótima forma de se conectar com o ambiente",
+        "title": "Caminhar na floresta",
+        "status": "A fazer"
+    },
+    {
+        "id": 7,
+        "desc": "Praticar meditação regularmente contribui para o equilíbrio mental",
+        "title": "Meditar por 15 minutos",
+        "status": "A fazer"
+    },
+    {
+        "id": 8,
+        "desc": "Aprender a tocar um instrumento musical é uma jornada enriquecedora",
+        "title": "Estudar piano",
+        "status": "A fazer"
+    },
+    {
+        "id": 9,
+        "desc": "Manter um diário é uma maneira eficaz de organizar pensamentos",
+        "title": "Escrever no diário",
+        "status": "A fazer"
+    },
+    {
+        "id": 10,
+        "desc": "Participar de eventos culturais amplia a compreensão do mundo",
+        "title": "Ir a uma exposição de arte",
+        "status": "A fazer"
+    },
+    {
+        "id": 11,
+        "desc": "Aprender programação é uma habilidade valiosa no mundo moderno",
+        "title": "Estudar JavaScript",
+        "status": "A fazer"
+    },
+    {
+        "id": 12,
+        "desc": "A prática constante é essencial para melhorar habilidades musicais",
+        "title": "Treinar guitarra por 30 minutos",
+        "status": "A fazer"
+    },
+    {
+        "id": 13,
+        "desc": "Incorporar hábitos saudáveis contribui para uma vida plena",
+        "title": "Preparar uma refeição balanceada",
+        "status": "A fazer"
+    },
+    {
+        "id": 14,
+        "desc": "Apreciar a natureza ajuda a aliviar o estresse do dia a dia",
+        "title": "Fazer um piquenique no parque",
+        "status": "A fazer"
+    },
+    {
+        "id": 15,
+        "desc": "A leitura diária de notícias mantém você informado sobre o mundo",
+        "title": "Ler notícias internacionais",
+        "status": "A fazer"
+    },
+    {
+        "id": 16,
+        "desc": "Aprender sobre diferentes culturas amplia a compreensão do mundo",
+        "title": "Estudar história japonesa",
+        "status": "A fazer"
+    },
+    {
+        "id": 17,
+        "desc": "A prática de yoga promove equilíbrio entre corpo e mente",
+        "title": "Praticar yoga por 20 minutos",
+        "status": "A fazer"
+    }
+]

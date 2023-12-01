@@ -1,4 +1,4 @@
-import { Box, Button, makeStyles } from "@material-ui/core"
+import { Box, Button, Typography, makeStyles } from "@material-ui/core"
 import AddIcon from '@material-ui/icons/Add';
 
 const useStyles = makeStyles({
@@ -29,15 +29,18 @@ const useStyles = makeStyles({
     }
 })
 
-function GridTask({title, onHandleClick}){
+function GridTask({title, onHandleClick, task}){
     const classes = useStyles()
 
     return(
         <>
-            <Box className={`${classes.alingPaper} ${classes.box} ${classes.height100} ${classes.fontStyle}`}>
-                {title}
-            </Box>
+           
             <Box className={`${classes.box} `}>
+                <Typography className={`${classes.alingPaper} ${classes.box} ${classes.fontStyle}`}>{title}</Typography>
+                <Box>
+                    {task}
+                </Box>
+                
                 <Button onClick={onHandleClick} >
                     <AddIcon className={classes.icon}/>
                 </Button> 
