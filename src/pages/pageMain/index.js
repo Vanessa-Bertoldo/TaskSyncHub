@@ -3,7 +3,7 @@ import Header from "../../componets/header"
 import GridTask from "../../componets/gridTask"
 import ListCardTask from "../../componets/listCardTask"
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
     paddingTop10: {
         paddingTop: "10%",
     },
@@ -19,8 +19,16 @@ const useStyles = makeStyles({
     },
     scrollBarHidden: {
         overflowX: "hidden"
-    }
-})
+    },
+    [theme.breakpoints.down('sm')]: {
+        height100: {
+            height: "auto",
+        },
+        paddingTop10: {
+            paddingTop: "5%",
+        },
+    },
+}))
 
 function PageMain(){
     const classes = useStyles()
@@ -37,7 +45,7 @@ function PageMain(){
             </Box>
             <Box>
                 <Grid container spacing={2} className={`${classes.paddingTop10} ${classes.height100}`}>
-                    <Grid item xs={12} sm={4} className={`${classes.height100} ${classes.scrollBarHidden}`}>
+                    <Grid item xs={12} sm={6} md={4} className={`${classes.height100} ${classes.scrollBarHidden}`}>
                         <GridTask
                             title={"A fazer"}
                             task={
@@ -47,9 +55,8 @@ function PageMain(){
                             }
                             onHandleClick={addTask}
                         />
-                            
                     </Grid>
-                    <Grid item xs={12} sm={4} className={classes.height100}>
+                    <Grid item xs={12} sm={6} md={4} className={classes.height100}>
                         <GridTask
                             title={"Em execução"}
                             task={
@@ -61,7 +68,7 @@ function PageMain(){
                             status={1}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={4} className={classes.height100}>
+                    <Grid item xs={12} sm={6} md={4} className={classes.height100}>
                         <GridTask
                             title={"Concluído"}
                             task={
