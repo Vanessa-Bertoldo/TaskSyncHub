@@ -13,54 +13,69 @@ const useStyles = makeStyles({
       alignContent: {
         alignContent: "center",
         width: "100vh",
+      },
+      scrollBar: {
+        overflowY: "scroll",
+        overflowX: "auto"
       }
 })
-
 const renderRow = (props, classes, status) => {
-    const { index, style } = props
-    return(
-        <ListItem>
-            <ListItemText button style={style} key={index}>
-                <Card className={classes.root}>
-                    <CardActionArea>
-                        <CardContent>
-                            <Typography gutterBottom variant="h5" component="h2">
-                                {data[index].title}
-                            </Typography>
-                            <Typography variant="body2" color="textSecondary" component="p">
-                                {data[index].desc}
-                            </Typography>
-                        </CardContent>
-                    </CardActionArea>
-                    <CardActions>
-                        <Button size="small" color="primary">
-                            Excluir
-                        </Button>
-                        <Button size="small" color="primary">
-                            Iniciar tarefa
-                        </Button>
-                    </CardActions>
-                </Card>
-            </ListItemText>
-        </ListItem>
-    )
-}
+    const { index, style } = props;
+    const currentItem = data[index];
 
-function ListCardTask(){
-    const classes = useStyles()
-    const dispatch = useDispatch()
+    const newData = [...data]
+    newData.sort((a, b) => a.status - b.status);
 
-    return(
-        <Container className={classes.alignContent}>
+    console.log("newData ", newData)
+
+    if (currentItem.status === status) {
+        return (
+            <ListItem button style={style} key={index}>
+                <ListItemText>
+                    <Card className={classes.root}>
+                        <CardActionArea>
+                            <CardContent>
+                                <Typography gutterBottom variant="h5" component="h2">
+                                    {newData[index].title}
+                                </Typography>
+                                <Typography variant="body2" color="textSecondary" component="p">
+                                    {newData[index].desc}
+                                </Typography>
+                            </CardContent>
+                        </CardActionArea>
+                        <CardActions>
+                            <Button size="small" color="primary">
+                                Excluir
+                            </Button>
+                            <Button size="small" color="primary">
+                                Iniciar tarefa
+                            </Button>
+                        </CardActions>
+                    </Card>
+                </ListItemText>
+            </ListItem>
+        );
+    }
+
+    // Retorna null para pular a renderização do item
+    return null;
+};
+
+function ListCardTask({ status }) {
+    const classes = useStyles();
+
+    return (
+        <Container className={`${classes.alignContent}`}>
             <FixedSizeList
-                height={600} 
-                width={400} 
-                itemSize={180} 
-                itemCount={15} 
+                height={600}
+                width={400}
+                itemSize={180}
+                itemCount={17}
             >
-                {(props) => renderRow(props, classes, dispatch)}
+                {(props) => renderRow(props, classes, status)}
             </FixedSizeList>
         </Container>
-    )
+    );
 }
-export default ListCardTask
+
+export default ListCardTask;

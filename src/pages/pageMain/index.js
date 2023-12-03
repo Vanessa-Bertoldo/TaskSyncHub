@@ -16,6 +16,9 @@ const useStyles = makeStyles({
     },
     height100: {
         height: "80vh"
+    },
+    scrollBarHidden: {
+        overflowX: "hidden"
     }
 })
 
@@ -34,10 +37,14 @@ function PageMain(){
             </Box>
             <Box>
                 <Grid container spacing={2} className={`${classes.paddingTop10} ${classes.height100}`}>
-                    <Grid item xs={12} sm={4} className={classes.height100}>
+                    <Grid item xs={12} sm={4} className={`${classes.height100} ${classes.scrollBarHidden}`}>
                         <GridTask
                             title={"A fazer"}
-                            task={<ListCardTask />}
+                            task={
+                                <ListCardTask 
+                                status={0}
+                                />
+                            }
                             onHandleClick={addTask}
                         />
                             
@@ -45,13 +52,25 @@ function PageMain(){
                     <Grid item xs={12} sm={4} className={classes.height100}>
                         <GridTask
                             title={"Em execução"}
+                            task={
+                                <ListCardTask 
+                                status={1}
+                                />
+                            }
                             onHandleClick={addTask}
+                            status={1}
                         />
                     </Grid>
                     <Grid item xs={12} sm={4} className={classes.height100}>
                         <GridTask
                             title={"Concluído"}
+                            task={
+                                <ListCardTask 
+                                status={2}
+                                />
+                            }
                             onHandleClick={addTask}
+                            status={2}
                         />
                     </Grid>
                 </Grid>
