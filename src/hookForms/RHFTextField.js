@@ -17,6 +17,7 @@ function RHFTextField({ name, label, ...other}){
               value={value}
               inputRef={ref}
               inputProps={other}
+              multiline
             />
           )}
         />

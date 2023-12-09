@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    open: true
+    open: false
 }
 
 const dialogUpdate = createSlice({
@@ -12,7 +12,7 @@ const dialogUpdate = createSlice({
             state.open = true;
         },
         closeDialog(state){
-            state.open = false
+            state.open = false;
         }
     }
 })

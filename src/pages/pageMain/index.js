@@ -4,6 +4,24 @@ import GridTask from "../../componets/gridTask"
 import ListCardTask from "../../componets/listCardTask"
 
 const useStyles = makeStyles((theme) => ({
+    /*'@font-face': [
+        {
+          fontFamily: 'Poppins-Regular',
+          src: `url('${require("../../fonts/poppins/Poppins-Regular.ttf")}') format('truetype')`,
+        },
+        {
+          fontFamily: 'Poppins-Medium',
+          src: `url('${require("../../fonts/poppins/Poppins-Medium.ttf")}') format('truetype')`,
+        },
+        {
+          fontFamily: 'Poppins-Bold',
+          src: `url('${require("../../fonts/poppins/Poppins-Bold.ttf")}') format('truetype')`,
+        },
+        {
+          fontFamily: 'Poppins-SemiBold',
+          src: `url('${require("../../fonts/poppins/Poppins-SemiBold.ttf")}') format('truetype')`,
+        },
+      ],*/
     paddingTop10: {
         paddingTop: "10%",
     },
