@@ -74,7 +74,7 @@ function PageMain(){
                             onHandleClick={addTask}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={6} md={4} className={classes.height100}>
+                    <Grid item xs={12} sm={6} md={4} className={`${classes.height100} ${classes.scrollBarHidden}`}>
                         <GridTask
                             title={"Em execução"}
                             task={
@@ -86,7 +86,7 @@ function PageMain(){
                             status={1}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={6} md={4} className={classes.height100}>
+                    <Grid item xs={12} sm={6} md={4} className={`${classes.height100} ${classes.scrollBarHidden}`}>
                         <GridTask
                             title={"Concluído"}
                             task={

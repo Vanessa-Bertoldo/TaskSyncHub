@@ -18,6 +18,7 @@ function RHFTextField({ name, label, ...other}){
               inputRef={ref}
               inputProps={other}
               multiline
+              fullWidth
             />
           )}
         />

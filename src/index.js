@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import store from "./store/store";
 import AppRoute from "./route";
 import DialogUpdate from "./dialogs/dialogUpdate";
+import "./assets/globalStyles/styles.css"
 
 ReactDOM.render(
   <Provider store={store}>

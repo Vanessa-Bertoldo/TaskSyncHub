@@ -4,6 +4,7 @@ import NotFound from "./pages/NotFound";
 import DialogUpdate from "./dialogs/dialogUpdate";
 import { useSelector } from "react-redux";
 import Login from "./pages/login/index.js";
+import Register from "./pages/register";
 
 
 function AppRoute() {
@@ -13,6 +14,7 @@ function AppRoute() {
                 <Route path="/" element={<Login/>}>
                     <Route path="/" element={<PageMain/>}/>
                 </Route>
+                <Route path="/register" element={<Register/>}/>
                 <Route path="*" element={<NotFound/>}/>
             </Routes>
         </BrowserRouter>
