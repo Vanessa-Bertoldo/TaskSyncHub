@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { ckeckUser } from "../connection_api/connection/connAuth";
 
 const initialState = {
    datalogin: null
@@ -15,3 +16,9 @@ const auth = createSlice({
 })
 export const { checkLogin } = auth.actions
 export default auth.reducer
+
+export function ckeckLoginUser(dto){
+   return async (dispatch) => {
+      await dispatch(ckeckUser(dto))
+   }
+}

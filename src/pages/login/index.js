@@ -7,9 +7,12 @@ import logo from "../../assets/taskHub.png"
 import { useStyles } from "../../assets/globalStyles/useStylesGlobal";
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useDispatch } from "react-redux";
+import { ckeckLoginUser } from "../../slices/sliceAuth";
 
 function Login() {
   const classes = useStyles();
+  const dispatch = useDispatch()
 
   const defaultValues = React.useMemo(() => ({
     
@@ -33,10 +36,11 @@ function Login() {
     control
   } = methods
 
-  const checkLogin = () => {
+  async function checkLogin() {
     const submit = trigger()
     if(submit){
-      console.log("getValues ", getValues())
+      const values = getValues()
+      await dispatch(ckeckLoginUser(values))
     }
     
   }
