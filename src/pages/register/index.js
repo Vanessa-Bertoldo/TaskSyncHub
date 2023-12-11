@@ -10,7 +10,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { dispatchDataRegister } from "../../slices/sliceRegister";
 import { useDispatch } from "react-redux";
 import { useNavigate } from 'react-router-dom'; 
-import Alert from "../../utils/alert/dialogAlert";
+import Alert from "../../utils/alert/dialogAlert"
 
 function Register() {
   const classes = useStyles();
@@ -45,6 +45,7 @@ function Register() {
       console.log("getvalues ", getValues())
       const values = getValues()
       const result = await dispatch(dispatchDataRegister(values))
+      Alert({title: "Sucesso", text: "Dados cadastrados com sucesso", icon:"success"})
       navigate("/")
     }
    

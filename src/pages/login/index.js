@@ -9,10 +9,14 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch } from "react-redux";
 import { ckeckLoginUser } from "../../slices/sliceAuth";
+import { ckeckUser } from "../../connection_api/connection/connAuth";
+import { useNavigate } from "react-router-dom";
+import Alert from "../../utils/alert/dialogAlert";
 
 function Login() {
   const classes = useStyles();
   const dispatch = useDispatch()
+  const navigate = useNavigate();
 
   const defaultValues = React.useMemo(() => ({
     
@@ -40,7 +44,13 @@ function Login() {
     const submit = trigger()
     if(submit){
       const values = getValues()
-      await dispatch(ckeckLoginUser(values))
+      const response = await dispatch(ckeckUser(values))
+      if(response.status === 200 && response.data !== null){
+        navigate("/inicio")
+      } else {
+        Alert({title: "Erro", text: "Usuário ou senha incorretos", icon:"erro"})
+      }
+      console.log("response ", response)
     }
     
   }

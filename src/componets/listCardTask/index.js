@@ -1,7 +1,8 @@
 import { Button, Card, CardActionArea, CardActions, CardContent, Container, ListItem, ListItemText, Typography, makeStyles } from "@material-ui/core"
-import data from "../../assets/listTask/list.json"
-import { useDispatch } from "react-redux"
+//import data from "../../assets/listTask/list.json"
+import { useDispatch, useSelector } from "react-redux"
 import { FixedSizeList } from 'react-window'
+import { getListTask } from "../../utils/cacheConfig";
 
 const useStyles = makeStyles({
     root: {
@@ -30,6 +31,10 @@ const renderRow = (props, classes, item) => {
         console.log("Data update", data)
     }
 
+    const handleDeleteTask = (task) => {
+        console.log("Data update", task)
+    }
+
     return (
         <ListItem  style={style} key={item.id} onDoubleClick={() => handleUpdate(item)}>
             <ListItemText>
@@ -40,12 +45,12 @@ const renderRow = (props, classes, item) => {
                                 {item.title}
                             </Typography>
                             <Typography variant="body2" color="textSecondary" component="p">
-                                {item.desc}
+                                {item.description}
                             </Typography>
                         </CardContent>
                     </CardActionArea>
                     <CardActions>
-                        <Button size="small" color="primary">
+                        <Button size="small" color="primary" onClick={() => handleDeleteTask(item)}>
                             Excluir
                         </Button>
                         <Button size="small" color="primary" onClick={() => handleStartTask(item)}>
@@ -60,6 +65,8 @@ const renderRow = (props, classes, item) => {
 
 function ListCardTask({ status }) {
     const classes = useStyles();
+    //const data = useSelector((state) => state.auth.dataTask)
+    const data = getListTask()
 
     const filteredData = data.filter(item => item.status === status);
 
