@@ -1,5 +1,6 @@
 import { Grid, Typography, makeStyles } from "@material-ui/core";
 import perfil from "../../assets/perfil.png"
+import { getDataLogin } from "../../utils/cacheConfig";
 
 
 const useStyles = makeStyles({
@@ -40,7 +41,7 @@ function Header(){
                     <img src={perfil} className={classes.img}/>
                 </Grid>
                 <Grid item xs={6} md={3} lg={2} className={`${classes.alingSelf} ${classes.height100}`}>
-                    <Typography variant="h4" className={classes.title}>Olá, Vanessa</Typography>
+                    <Typography variant="h4" className={classes.title}>Olá, {getDataLogin().name}</Typography>
                 </Grid>
             </Grid>
         </div>

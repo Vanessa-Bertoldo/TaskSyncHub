@@ -12,9 +12,11 @@ export const deleteTask = (id) => async (dispatch) => {
                     await setListTask(response.data)
                 }
                 await AlertSucess({title: "Sucesso", text: "Dados excluídos com sucesso", icon: "success"})
+                window.location.reload();
             }
             
         }
+        return response
     } catch(error) {
         return error
     }

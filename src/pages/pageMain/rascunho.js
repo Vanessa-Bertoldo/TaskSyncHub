@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }))
 
-function PageMain(){
+function PageMain2(){
     const classes = useStyles()
     const dispatch = useDispatch()
 
@@ -109,4 +109,4 @@ function PageMain(){
         </Container>
     )
 }
-export default PageMain
+export default PageMain2

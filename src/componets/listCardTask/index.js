@@ -71,9 +71,7 @@ function ListCardTask({ status }) {
 
     const handleDeleteTask = async (task) => {
         await AlertYesNo({async onClickConfirm(){
-            console.log("indo morrer")
             await dispatch(deleteTask(task.id))
-            window.location.reload();
         }, onCancel(){
             
         },
@@ -113,7 +111,7 @@ function ListCardTask({ status }) {
         <Container className={`${classes.alignContent}`}>
             <FixedSizeList
                 height={600}
-                width={400}
+                width={350}
                 itemSize={180}
                 itemCount={filteredData.length}
             >
