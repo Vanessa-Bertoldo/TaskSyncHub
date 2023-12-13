@@ -5,6 +5,8 @@ import { deleteTask, updateStatus } from "../../connection_api/connection/connTa
 import { AlertYesNo } from "../../utils/alert/alertYesNo";
 import { useDispatch } from "react-redux";
 import React, { useState } from "react";
+import { closedScreenLoader, openScreenLoader } from "../../slices/sliceScreenLoader";
+import { emptyData, loadDataTask, updateStatusTasks } from "../../slices/sliceDialogUpdate";
 
 const useStyles = makeStyles({
     root: {
@@ -22,18 +24,8 @@ const useStyles = makeStyles({
         overflowX: "auto"
       }
 })
-const renderRow = (props, classes, item, handleDeleteTask) => {
+const renderRow = (props, classes, item, handleDeleteTask, handleStartTask, handleUpdate) => {
     const { style } = props;
-
-    const handleStartTask = (data) => {
-        const dataUpdate = {}
-        //dispatch(updateStatus(data))
-        console.log("Data ", data)
-    }
-
-    const handleUpdate = (data) => {
-        console.log("Data update", data)
-    }
     
     return (
         <ListItem  style={style} key={item.id} onDoubleClick={() => handleUpdate(item)}>
@@ -62,6 +54,8 @@ const renderRow = (props, classes, item, handleDeleteTask) => {
         </ListItem>
     );
 };
+
+
 function ListCardTask({ status }) {
 
     const [list, setList] = useState([])
@@ -89,6 +83,30 @@ function ListCardTask({ status }) {
         console.log("Data update", task)
     }
 
+    const handleStartTask = async (data) => {
+        console.log("Data ", data) 
+        await AlertYesNo({async onClickConfirm(){
+            data.status += 1
+            dispatch(openScreenLoader())
+            await dispatch(updateStatusTasks(data))
+            dispatch(closedScreenLoader())
+        }, onCancel(){
+           
+        },
+        title: "Aviso",
+        text: data.status === 0 ? "Deseja iniciar tarefa? " : "Deseja concluir tarefa?",
+        icon: "warning"})
+        const dataUpdate = {}
+        
+       
+    }
+
+    
+    const handleUpdate = async (data) => {
+        dispatch(openScreenLoader())
+        await dispatch(loadDataTask(data))
+        dispatch(closedScreenLoader())
+    }
     const filteredData = data.filter(item => item.status === status);
 
     return (
@@ -99,7 +117,14 @@ function ListCardTask({ status }) {
                 itemSize={180}
                 itemCount={filteredData.length}
             >
-                {(props) => renderRow(props, classes, filteredData[props.index],handleDeleteTask )}
+                {(props) => renderRow(
+                    props, 
+                    classes, 
+                    filteredData[props.index],
+                    handleDeleteTask, 
+                    handleStartTask,
+                    handleUpdate
+                )}
             </FixedSizeList>
         </Container>
     );

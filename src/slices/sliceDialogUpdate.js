@@ -1,11 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getDataLogin } from "../utils/cacheConfig";
 import { formatDate } from "../utils/formatDate";
-import { insertDataTask } from "../connection_api/connection/connTasks";
+import { insertDataTask, updateTask } from "../connection_api/connection/connTasks";
 
 const initialState = {
     open: false,
     status: 0,
+    dataTask: null
 }
 
 const dialogUpdate = createSlice({
@@ -20,6 +21,9 @@ const dialogUpdate = createSlice({
         },
         updateStatus(state, action){
             state.status = action.payload
+        },
+        updateDataTask(state, action){
+            state.dataTask = action.payload
         }
     }
 })
@@ -45,3 +49,38 @@ export function insertTask(dto, status){
         await dispatch(insertDataTask(data))
     }
 }
+
+export function loadDataTask(data){
+    return async (dispatch) => {
+        console.log("data ", data)
+        await dispatch(dialogUpdate.actions.updateDataTask(data))
+        await dispatch(openDialogUpdate())
+      
+    } 
+}
+
+export function emptyData(){
+    return async (dispatch) => {
+        await dispatch(dialogUpdate.actions.updateDataTask(null))
+    }
+}
+
+export function updateStatusTasks(dto, dto2){
+    return async (dispatch) => {
+        console.log("dataUpdate ", dto)
+        const newData = {
+            id: dto2.id,
+            title: dto.title,
+            description: dto.description,
+            status: dto2.status
+        }
+        await dispatch(updateTask(newData))
+    }
+}
+/**date_final
+date_initial
+description 
+id
+status
+title
+user_id */

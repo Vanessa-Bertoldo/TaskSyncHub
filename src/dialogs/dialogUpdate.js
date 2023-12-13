@@ -1,10 +1,10 @@
 import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, makeStyles } from "@material-ui/core"
 import { useDispatch, useSelector } from "react-redux"
-import { closeDialog, insertTask, openDialogUpdate } from "../slices/sliceDialogUpdate"
+import { closeDialog, emptyData, insertTask, openDialogUpdate, updateStatusTasks } from "../slices/sliceDialogUpdate"
 import RHFTextField from "../hookForms/RHFTextField"
 import HookFormProvider from "../componets/formProvider"
 import { useForm } from "react-hook-form"
-import React from "react"
+import React, { useEffect } from "react"
 import { AlertYesNo } from "../utils/alert/alertYesNo"
 
 const useStyles = makeStyles({
@@ -39,18 +39,20 @@ const useStyles = makeStyles({
 function DialogUpdate(){
     const open = useSelector((state) => state.dialogUpdate.open)
     const status = useSelector((state) => state.dialogUpdate.status)
+    const dataLoader = useSelector((state) => state.dialogUpdate.dataTask)
     const classes = useStyles()
 
     const dispatch = useDispatch()
 
-    const onClose = () => {
-        dispatch(closeDialog())
-    }
-
     const defaultValues = React.useMemo(() => ({
-      title: "",
-      description: ""
-    }),[])
+      title: dataLoader !== null ? dataLoader.title : "",
+      description: dataLoader !== null ? dataLoader.description : ""
+    }),[dataLoader])
+
+    const emptyFields = React.useMemo(() => ({
+        title: "",
+        description: ""
+    }))
 
     const methods = useForm({
         defaultValues
@@ -60,14 +62,33 @@ function DialogUpdate(){
         getValues,
         setValue,
         trigger,
+        reset,
         control
     } = methods
 
+    useEffect(() => {
+        reset(defaultValues)
+    },[dataLoader])
+
+    const onClose = async () => {
+        reset(emptyFields)
+        await dispatch(emptyData())
+        dispatch(closeDialog())
+    }
+
     const handleSave = async () => {
+        console.log("dataaaaa ", dataLoader)
         const values = getValues()
         dispatch(closeDialog())
         await AlertYesNo({async onClickConfirm(){
-            await dispatch(insertTask(values, status))
+            if(dataLoader === null){
+                await dispatch(insertTask(values, status))
+                console.log("inserir ")
+            } else {
+                await dispatch(updateStatusTasks(values, dataLoader))
+                console.log("update")
+            }
+            
             
         }, onCancel(){
             dispatch(openDialogUpdate())

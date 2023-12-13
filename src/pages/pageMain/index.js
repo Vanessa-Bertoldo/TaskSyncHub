@@ -2,7 +2,7 @@ import { Box, Container, CssBaseline, Grid, makeStyles } from "@material-ui/core
 import Header from "../../componets/header"
 import GridTask from "../../componets/gridTask"
 import ListCardTask from "../../componets/listCardTask"
-import { openDialogUpdate, sendStatus } from "../../slices/sliceDialogUpdate"
+import { emptyData, openDialogUpdate, sendStatus } from "../../slices/sliceDialogUpdate"
 import { useDispatch } from "react-redux"
 
 const useStyles = makeStyles((theme) => ({
@@ -55,6 +55,7 @@ function PageMain(){
     const dispatch = useDispatch()
 
     const addTask = async (status) => {
+        await dispatch(emptyData())
         await dispatch(sendStatus(status))
         await dispatch(openDialogUpdate())
     }
@@ -98,7 +99,7 @@ function PageMain(){
                                 status={2}
                                 />
                             }
-                            onHandleClick={() => addTask(3)}
+                            onHandleClick={() => addTask(2)}
                             status={2}
                         />
                     </Grid>

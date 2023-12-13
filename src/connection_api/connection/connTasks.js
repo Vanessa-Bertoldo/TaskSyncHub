@@ -36,12 +36,18 @@ export const insertDataTask = (dto) => async (dispatch) => {
     }
 }
 
-export const updateStatus = (dto) => async (dispatch) => {
+export const updateTask = (dto) => async (dispatch) => {
     try{
-        
+        console.log("new dat" , dto)
         const response = await updateData(DB_CONNECTION.LINK_SERVER_TASKS, dto)
         console.log("response ", response)
-        window.location.reload()
+        if(response.status === 200){
+            console.log("entrada if")
+            await setListTask(response.data)
+            await AlertSucess({title: "Sucesso", text: "Dados salvos com sucesso", icon: "success"})
+            window.location.reload();
+        }
+        return response
     } catch(error) {
         return error
     }
