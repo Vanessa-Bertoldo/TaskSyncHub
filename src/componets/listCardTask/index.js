@@ -1,7 +1,7 @@
 import { Button, Card, CardActionArea, CardActions, CardContent, Container, ListItem, ListItemText, Typography, makeStyles } from "@material-ui/core"
 import { FixedSizeList } from 'react-window'
 import { getListTask } from "../../utils/cacheConfig";
-import { deleteTask } from "../../connection_api/connection/connTasks";
+import { deleteTask, updateStatus } from "../../connection_api/connection/connTasks";
 import { AlertYesNo } from "../../utils/alert/alertYesNo";
 import { useDispatch } from "react-redux";
 import React, { useState } from "react";
@@ -26,6 +26,8 @@ const renderRow = (props, classes, item, handleDeleteTask) => {
     const { style } = props;
 
     const handleStartTask = (data) => {
+        const dataUpdate = {}
+        //dispatch(updateStatus(data))
         console.log("Data ", data)
     }
 
@@ -52,7 +54,7 @@ const renderRow = (props, classes, item, handleDeleteTask) => {
                             Excluir
                         </Button>
                         <Button size="small" color="primary" onClick={() => handleStartTask(item)}>
-                            Iniciar tarefa
+                            {item.status === 0 ? "Iniciar tarefa" : item.status === 1 ? "Concluir tarefa" : ""}
                         </Button>
                     </CardActions>
                 </Card>

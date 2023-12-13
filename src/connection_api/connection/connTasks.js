@@ -1,7 +1,7 @@
 import { AlertSucess } from "../../utils/alert/alertSucess"
 import { setListTask } from "../../utils/cacheConfig"
 import { DB_CONNECTION } from "../constantsAPI"
-import { AxiosDelete, AxiosPost } from "../requestsAPI"
+import { AxiosDelete, AxiosPost, updateData } from "../requestsAPI"
 
 export const deleteTask = (id) => async (dispatch) => {
     try{
@@ -31,6 +31,17 @@ export const insertDataTask = (dto) => async (dispatch) => {
         }
         
         return response
+    } catch(error) {
+        return error
+    }
+}
+
+export const updateStatus = (dto) => async (dispatch) => {
+    try{
+        
+        const response = await updateData(DB_CONNECTION.LINK_SERVER_TASKS, dto)
+        console.log("response ", response)
+        window.location.reload()
     } catch(error) {
         return error
     }

@@ -39,3 +39,14 @@ export const AxiosDelete = async (url, id) => {
         throw error;
     }
 };
+
+export async function updateData(url, data) {
+    try {
+      const response = await axios.put(url, data);
+      console.log('Dados atualizados com sucesso:', response.data);
+      return response.data;
+    } catch (error) {
+      console.error('Erro ao atualizar dados:', error);
+      throw error;
+    }
+}
