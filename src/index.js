@@ -6,6 +6,7 @@ import store from "./store/store";
 import AppRoute from "./route";
 import DialogUpdate from "./dialogs/dialogUpdate";
 import "./assets/globalStyles/styles.css"
+import { AlertYesNo } from "./utils/alert/alertYesNo";
 
 ReactDOM.render(
   <Provider store={store}>

@@ -28,3 +28,14 @@ export function AxiosGet(url) {
         });
         
 }
+
+export const AxiosDelete = async (url, id) => {
+    try {
+        const response = await axios.delete(`${url}/${id}`);
+        console.log('Dado deletado com sucesso:', response.data);
+        return response.data;
+    } catch (error) {
+        console.error('Erro ao deletar dado:', error);
+        throw error;
+    }
+};

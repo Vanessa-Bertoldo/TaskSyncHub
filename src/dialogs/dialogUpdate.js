@@ -1,10 +1,11 @@
 import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, makeStyles } from "@material-ui/core"
 import { useDispatch, useSelector } from "react-redux"
-import { closeDialog } from "../slices/sliceDialogUpdate"
+import { closeDialog, insertTask, openDialogUpdate } from "../slices/sliceDialogUpdate"
 import RHFTextField from "../hookForms/RHFTextField"
 import HookFormProvider from "../componets/formProvider"
 import { useForm } from "react-hook-form"
 import React from "react"
+import { AlertYesNo } from "../utils/alert/alertYesNo"
 
 const useStyles = makeStyles({
     width100: {
@@ -37,6 +38,7 @@ const useStyles = makeStyles({
 
 function DialogUpdate(){
     const open = useSelector((state) => state.dialogUpdate.open)
+    const status = useSelector((state) => state.dialogUpdate.status)
     const classes = useStyles()
 
     const dispatch = useDispatch()
@@ -46,7 +48,8 @@ function DialogUpdate(){
     }
 
     const defaultValues = React.useMemo(() => ({
-      
+      title: "",
+      description: ""
     }),[])
 
     const methods = useForm({
@@ -59,6 +62,20 @@ function DialogUpdate(){
         trigger,
         control
     } = methods
+
+    const handleSave = async () => {
+        const values = getValues()
+        dispatch(closeDialog())
+        await AlertYesNo({async onClickConfirm(){
+            await dispatch(insertTask(values, status))
+            
+        }, onCancel(){
+            dispatch(openDialogUpdate())
+        },
+        title: "Aviso",
+        text: "Deseja salvar dados?",
+        icon: "warning"})
+    }
 
     return(
         <Dialog
@@ -74,18 +91,19 @@ function DialogUpdate(){
                         <RHFTextField
                             name="title"
                             label="Titulo"
-                            rows={1}
+                           
                         />
                         <RHFTextField
                             name="description"
                             label="Descrição"
-                            rows={5}
+                            minRows={5}
+                            maxRows={10} 
                         />
                     </Box>
                 </HookFormProvider>
             </DialogContent>
             <DialogActions className={`${classes.padding20}`}>
-                <Button className={`${classes.buttonGreen}`}>SALVAR</Button>
+                <Button className={`${classes.buttonGreen}`} onClick={handleSave}>SALVAR</Button>
                 <Button onClick={onClose} className={`${classes.buttonRed}`}>FECHAR</Button>
             </DialogActions>
         </Dialog>

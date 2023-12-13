@@ -12,6 +12,8 @@ import { ckeckLoginUser } from "../../slices/sliceAuth";
 import { ckeckUser } from "../../connection_api/connection/connAuth";
 import { useNavigate } from "react-router-dom";
 import Alert from "../../utils/alert/dialogAlert";
+import { closedScreenLoader, openScreenLoader } from "../../slices/sliceScreenLoader";
+import { setDataLogin } from "../../utils/cacheConfig";
 
 function Login() {
   const classes = useStyles();
@@ -44,12 +46,16 @@ function Login() {
     const submit = trigger()
     if(submit){
       const values = getValues()
+      dispatch(openScreenLoader())
       const response = await dispatch(ckeckUser(values))
       if(response.status === 200 && response.data !== null){
+        const data = response.data
+        await setDataLogin({id: data.id, name: data.name, email: data.email, password: data.password})
         navigate("/inicio")
       } else {
         Alert({title: "Erro", text: "Usuário ou senha incorretos", icon:"erro"})
       }
+      dispatch(closedScreenLoader())
       console.log("response ", response)
     }
     

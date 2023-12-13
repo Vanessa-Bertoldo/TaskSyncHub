@@ -1,8 +1,10 @@
 import { Button, Card, CardActionArea, CardActions, CardContent, Container, ListItem, ListItemText, Typography, makeStyles } from "@material-ui/core"
-//import data from "../../assets/listTask/list.json"
-import { useDispatch, useSelector } from "react-redux"
 import { FixedSizeList } from 'react-window'
 import { getListTask } from "../../utils/cacheConfig";
+import { deleteTask } from "../../connection_api/connection/connTasks";
+import { AlertYesNo } from "../../utils/alert/alertYesNo";
+import { useDispatch } from "react-redux";
+import React, { useState } from "react";
 
 const useStyles = makeStyles({
     root: {
@@ -20,7 +22,7 @@ const useStyles = makeStyles({
         overflowX: "auto"
       }
 })
-const renderRow = (props, classes, item) => {
+const renderRow = (props, classes, item, handleDeleteTask) => {
     const { style } = props;
 
     const handleStartTask = (data) => {
@@ -30,11 +32,7 @@ const renderRow = (props, classes, item) => {
     const handleUpdate = (data) => {
         console.log("Data update", data)
     }
-
-    const handleDeleteTask = (task) => {
-        console.log("Data update", task)
-    }
-
+    
     return (
         <ListItem  style={style} key={item.id} onDoubleClick={() => handleUpdate(item)}>
             <ListItemText>
@@ -62,11 +60,32 @@ const renderRow = (props, classes, item) => {
         </ListItem>
     );
 };
-
 function ListCardTask({ status }) {
-    const classes = useStyles();
-    //const data = useSelector((state) => state.auth.dataTask)
-    const data = getListTask()
+
+    const [list, setList] = useState([])
+
+    React.useEffect(() => {
+        setList(getListTask())
+    },[])
+
+
+    const classes = useStyles()
+    const data = list
+    const dispatch = useDispatch()
+
+    const handleDeleteTask = async (task) => {
+        await AlertYesNo({async onClickConfirm(){
+            console.log("indo morrer")
+            await dispatch(deleteTask(task.id))
+            window.location.reload();
+        }, onCancel(){
+            
+        },
+        title: "Aviso",
+        text: "Os dados serão excluídos permanentemente, deseja prosseguir?",
+        icon: "warning"})
+        console.log("Data update", task)
+    }
 
     const filteredData = data.filter(item => item.status === status);
 
@@ -78,7 +97,7 @@ function ListCardTask({ status }) {
                 itemSize={180}
                 itemCount={filteredData.length}
             >
-                {(props) => renderRow(props, classes, filteredData[props.index])}
+                {(props) => renderRow(props, classes, filteredData[props.index],handleDeleteTask )}
             </FixedSizeList>
         </Container>
     );
