@@ -28,7 +28,8 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: "#E1E1E1"
     },
     height100: {
-        height: "80%"
+        height: "80%",
+        width: "100%"
     },
     scrollBarHidden: {
         overflowX: "hidden",
@@ -48,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down('sm')]: {        
         padding: "15px"
       },
-    
+  
 }))
 
 function PageMain(){
@@ -62,7 +63,7 @@ function PageMain(){
     }
 
     return(
-        <Container className={classes.height100} component="main" maxWidth="lg">
+        <Container className={`${classes.height100}`} component="main" maxWidth="lg">
             <Box className={classes.header}>
                 <Header/>
             </Box>
