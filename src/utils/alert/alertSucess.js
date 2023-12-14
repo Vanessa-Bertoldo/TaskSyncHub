@@ -4,13 +4,7 @@ import Swal from "sweetalert2";
 import { emptyData } from "../../slices/sliceDialogUpdate";
 
 export const AlertSucess = (props) => {
-    const dispatch = useDispatch()
-    React.useEffect(async () => {
-        await dispatch(emptyData())
-    }, [props])
-
-    console.log("fui chamado ")
-    return(
+        return(
         Swal.fire({
             title: props.title,
             text: props.text,
@@ -18,3 +12,11 @@ export const AlertSucess = (props) => {
           })
     )
 }
+
+/*
+function empty(props){
+    const dispatch = useDispatch()
+    React.useEffect(async () => {
+        await dispatch(emptyData())
+    }, [props])
+}*/

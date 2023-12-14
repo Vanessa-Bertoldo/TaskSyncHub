@@ -22,6 +22,7 @@ export default register.reducer;
 
 export function dispatchDataRegister(data){
     return async (dispatch) => {
-        await dispatch(registerUser(data))
+      const res = await dispatch(registerUser(data))
+      return res
     }
 }

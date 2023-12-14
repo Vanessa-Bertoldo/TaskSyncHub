@@ -7,8 +7,10 @@ import { useDispatch } from "react-redux";
 import React, { useState } from "react";
 import { closedScreenLoader, openScreenLoader } from "../../slices/sliceScreenLoader";
 import { emptyData, loadDataTask, updateStatusTasks } from "../../slices/sliceDialogUpdate";
+import { AlertSucess } from "../../utils/alert/alertSucess";
+import { refresh } from "../../utils/refresh";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
     root: {
         maxWidth: 345,
       },
@@ -22,18 +24,37 @@ const useStyles = makeStyles({
       scrollBar: {
         overflowY: "scroll",
         overflowX: "auto"
-      }
-})
+      },
+      shadow: {
+        boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.3)', 
+      },
+      cardlist: {
+        borderRadius: "10px"
+      },
+      customScrollbar: {
+        '&::-webkit-scrollbar': {
+          width: '15px', 
+        },
+        '&::-webkit-scrollbar-thumb': {
+          backgroundColor: "#262626", 
+          borderRadius: '5px', 
+        },
+        '&::-webkit-scrollbar-track': {
+          backgroundColor: theme.palette.background.paper, 
+          borderRadius: '10px',
+        },
+      },
+}))
 const renderRow = (props, classes, item, handleDeleteTask, handleStartTask, handleUpdate) => {
     const { style } = props;
     
     return (
-        <ListItem  style={style} key={item.id} onDoubleClick={() => handleUpdate(item)}>
+        <ListItem style={style} key={item.id} onDoubleClick={() => handleUpdate(item)}>
             <ListItemText>
-                <Card className={classes.root}>
+                <Card className={`${classes.root} ${classes.shadow} ${classes.cardlist}`}>
                     <CardActionArea>
-                        <CardContent>
-                            <Typography gutterBottom variant="h5" component="h2">
+                        <CardContent className={classes.customTextField}>
+                            <Typography gutterBottom variant="h5" component="h2" >
                                 {item.title}
                             </Typography>
                             <Typography variant="body2" color="textSecondary" component="p">
@@ -71,7 +92,14 @@ function ListCardTask({ status }) {
 
     const handleDeleteTask = async (task) => {
         await AlertYesNo({async onClickConfirm(){
-            await dispatch(deleteTask(task.id))
+            const resp = await dispatch(deleteTask(task.id))
+            console.log("resp ", resp)
+            if(resp && resp.status === 200){
+                await AlertSucess({title: "Sucesso", text: "Dados excluídos com sucesso", icon: "success"})
+                refresh()
+                
+            }
+
         }, onCancel(){
             
         },
@@ -108,12 +136,13 @@ function ListCardTask({ status }) {
     const filteredData = data.filter(item => item.status === status);
 
     return (
-        <Container className={`${classes.alignContent}`}>
+        <Container className={`${classes.alignContent} `}>
             <FixedSizeList
                 height={600}
                 width={350}
                 itemSize={180}
-                itemCount={filteredData.length}
+                itemCount={filteredData.length} 
+                className={`${classes.customScrollbar}`}
             >
                 {(props) => renderRow(
                     props, 

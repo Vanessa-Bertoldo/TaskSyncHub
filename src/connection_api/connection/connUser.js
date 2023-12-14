@@ -9,10 +9,6 @@ export const registerUser = (dto) => async (dispatch) => {
             password:   dto.password
         }
         const response = await AxiosPost(DB_CONNECTION.LINK_SERVER_AUTH, data)
-        console.log("response ", response)
-        if(response.status === 200){
-            console.log("sucesso register")
-        }
         return response.status
     } catch(error) {
         return error

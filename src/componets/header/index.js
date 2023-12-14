@@ -1,51 +1,83 @@
-import { Grid, Typography, makeStyles } from "@material-ui/core";
-import perfil from "../../assets/perfil.png"
-import { getDataLogin } from "../../utils/cacheConfig";
+import React, { useState } from "react";
+import { Grid, IconButton, Menu, MenuItem, makeStyles } from "@material-ui/core";
+import logo from "../../assets/taskHub.png";
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import { useNavigate } from "react-router-dom";
+import { AlertYesNo } from "../../utils/alert/alertYesNo";
+import { setDataLogin } from "../../utils/cacheConfig";
 
+const useStyles = makeStyles((theme) => ({
+  header: {
+    width: "100%",
+    height: "80px",
+    background: "#000",
+    margin: "none",
+    position: "fixed",
+    top: 0,
+    left: 0,
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: "0 20px",
+  },
+  img: {
+    height: "60px",
+    maxWidth: "100%",
+  },
+  menuButton: {
+    color: "#fff",
+  },
+  icon: {
+    color: "#fff",
+    fontSize: 30,
+    marginRight: theme.spacing(2),
+  },
+}));
 
-const useStyles = makeStyles({
-    header: {
-        width: "100%",
-        height: "10%",
-        background: "#49423F",
-        margin: "none",
-        position: "fixed",
-        top: 0,
-        left: 0,
-    },
-    background:{
-        background: "#49423F",
-    },
-    title: {
-        color: "#fff",
-        alignSelf: "center",
-        textJustify: "left"
-    },
-    img:{
-        height: "100%"
-    },
-    alingSelf: {
-        alignSelf: "center"
-    },
-    height100: {
-        height: "100%"
-    }
-  });
+function Header() {
+  const classes = useStyles();
+  const [anchorEl, setAnchorEl] = useState(null);
+  const navigate = useNavigate()
 
-function Header(){
-    const classes = useStyles()
-    return(
-        <div className={classes.header}>
-            <Grid container spacing={2} className={`${classes.background} ${classes.height100}`}>
-                <Grid item xs={6} md={3} lg={1} className={`${classes.background} ${classes.height100}`}>
-                    <img src={perfil} className={classes.img}/>
-                </Grid>
-                <Grid item xs={6} md={3} lg={2} className={`${classes.alingSelf} ${classes.height100}`}>
-                    <Typography variant="h4" className={classes.title}>Olá, {getDataLogin().name}</Typography>
-                </Grid>
-            </Grid>
-        </div>
-        
-    )
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleOptionClick = async (option) => {
+    await AlertYesNo({async onClickConfirm(){
+        //setDataLogin(null)
+        navigate("/")
+        handleClose();
+    }, onCancel(){
+        handleClose();
+    },
+    title: "Aviso",
+    text: "Deseja sair da aplicação?",
+    icon: "warning"})
+    
+  };
+
+  return (
+    <div className={classes.header}>
+      <img src={logo} className={classes.img} alt="Logo" />
+      <IconButton className={classes.menuButton} aria-controls="header-menu" aria-haspopup="true" onClick={handleClick}>
+        <MoreVertIcon className={classes.icon} />
+      </IconButton>
+      <Menu
+        id="header-menu"
+        anchorEl={anchorEl}
+        keepMounted
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
+      >
+        <MenuItem onClick={() => handleOptionClick()}>Sair</MenuItem>
+      </Menu>
+    </div>
+  );
 }
-export default Header
+
+export default Header;

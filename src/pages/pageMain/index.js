@@ -6,24 +6,13 @@ import { emptyData, openDialogUpdate, sendStatus } from "../../slices/sliceDialo
 import { useDispatch } from "react-redux"
 
 const useStyles = makeStyles((theme) => ({
-    /*'@font-face': [
-        {
-          fontFamily: 'Poppins-Regular',
-          src: `url('${require("../../fonts/poppins/Poppins-Regular.ttf")}') format('truetype')`,
-        },
-        {
-          fontFamily: 'Poppins-Medium',
-          src: `url('${require("../../fonts/poppins/Poppins-Medium.ttf")}') format('truetype')`,
-        },
-        {
-          fontFamily: 'Poppins-Bold',
-          src: `url('${require("../../fonts/poppins/Poppins-Bold.ttf")}') format('truetype')`,
-        },
-        {
-          fontFamily: 'Poppins-SemiBold',
-          src: `url('${require("../../fonts/poppins/Poppins-SemiBold.ttf")}') format('truetype')`,
-        },
-      ],*/
+    header: {
+        zIndex: theme.zIndex.drawer + 1,
+        height: "5%",
+        paddingBottom: "10%",
+        position: "sticky", 
+        top: 0,  
+    },
     paddingTop10: {
         paddingTop: "10%",
     },
@@ -35,11 +24,11 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: "#E1E1E1"
     },
     height100: {
-        height: "80vh"
+        height: "80%"
     },
     scrollBarHidden: {
         overflowX: "hidden",
-        
+        overflowY: "hidden",
     },
     [theme.breakpoints.down('sm')]: {
         height100: {
@@ -49,6 +38,13 @@ const useStyles = makeStyles((theme) => ({
             paddingTop: "5%",
         },
     },
+    gridCard: {
+        borderRadius: "16px"
+    },
+    [theme.breakpoints.down('sm')]: {        
+        padding: "10px"
+      },
+    
 }))
 
 function PageMain(){
@@ -63,15 +59,14 @@ function PageMain(){
 
     return(
         <Container className={classes.height100} component="main" maxWidth="lg">
-            <CssBaseline/>
-            <Box>
+            <Box className={classes.header}>
                 <Header/>
             </Box>
             <Box>
-                <Grid container spacing={2} className={`${classes.paddingTop10} ${classes.height100}`}>
-                    <Grid item xs={12} sm={6} md={4} className={`${classes.height100} ${classes.scrollBarHidden}`}>
+                <Grid container spacing={3} className={`${classes.paddingTop10} ${classes.height100}`}>
+                    <Grid item xs={12} sm={6} md={4} className={`${classes.height100}  ${classes.scrollBarHidden}`}>
                         <GridTask
-                            title={"A fazer"}
+                            title={"A FAZER"}
                             task={
                                 <ListCardTask 
                                 status={0}
@@ -82,7 +77,7 @@ function PageMain(){
                     </Grid>
                     <Grid item xs={12} sm={6} md={4} className={`${classes.height100} ${classes.scrollBarHidden}`}>
                         <GridTask
-                            title={"Em execução"}
+                            title={"EM EXECUÇÃO"}
                             task={
                                 <ListCardTask 
                                 status={1}
@@ -94,10 +89,11 @@ function PageMain(){
                     </Grid>
                     <Grid item xs={12} sm={6} md={4} className={`${classes.height100} ${classes.scrollBarHidden}`}>
                         <GridTask
-                            title={"Concluído"}
+                            title={"CONCLUÍDO"}
                             task={
                                 <ListCardTask 
-                                status={2}
+                                    className={classes.customScrollbar}
+                                    status={2}
                                 />
                             }
                             onHandleClick={() => addTask(2)}
@@ -109,4 +105,5 @@ function PageMain(){
         </Container>
     )
 }
+
 export default PageMain

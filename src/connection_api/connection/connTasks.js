@@ -1,5 +1,6 @@
 import { AlertSucess } from "../../utils/alert/alertSucess"
 import { setListTask } from "../../utils/cacheConfig"
+import { refresh } from "../../utils/refresh"
 import { DB_CONNECTION } from "../constantsAPI"
 import { AxiosDelete, AxiosPost, updateData } from "../requestsAPI"
 
@@ -8,11 +9,11 @@ export const deleteTask = (id) => async (dispatch) => {
         const response = await AxiosDelete(DB_CONNECTION.LINK_SERVER_TASKS, id)
         if(response.data !== null){
             if(response.status === 200){
+                console.log("entrei no if")
                 if(response.data !== null){
                     await setListTask(response.data)
+                    console.log("entrei no if")
                 }
-                await AlertSucess({title: "Sucesso", text: "Dados excluídos com sucesso", icon: "success"})
-                window.location.reload();
             }
             
         }
@@ -29,7 +30,7 @@ export const insertDataTask = (dto) => async (dispatch) => {
         if(response.status === 200){
             await setListTask(response.data)
             await AlertSucess({title: "Sucesso", text: "Dados salvos com sucesso", icon: "success"})
-            window.location.reload();
+            refresh()
         }
         
         return response
@@ -47,7 +48,7 @@ export const updateTask = (dto) => async (dispatch) => {
             console.log("entrada if")
             await setListTask(response.data)
             await AlertSucess({title: "Sucesso", text: "Dados salvos com sucesso", icon: "success"})
-            window.location.reload();
+            refresh()
         }
         return response
     } catch(error) {

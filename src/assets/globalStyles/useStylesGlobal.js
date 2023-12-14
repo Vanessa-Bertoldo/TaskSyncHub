@@ -2,7 +2,7 @@ import { makeStyles } from "@material-ui/core";
 import logo from "../../assets/taskHub.png"
 import backgImage from "../../assets/background.jpg"
 
-export const useStyles = makeStyles({
+export const useStyles = makeStyles((theme) => ({
     centerSquare: {
       display: 'flex',
       justifyContent: 'center',
@@ -13,6 +13,12 @@ export const useStyles = makeStyles({
       padding: "20px",
       backgroundColor: "#fff",
     },
+    centerSquare: {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      minHeight: '100%',
+    },
     grid: {
       display: "grid",
       gridTemplateColumns: "auto",
@@ -22,7 +28,14 @@ export const useStyles = makeStyles({
     }, 
     width100: {
       width: "100%",
-      textAlign: "center", 
+      
+    },
+    width80: {
+      width: "80%"
+    },
+    alignCenter: {
+      textAlign: "-webkit-center", 
+      //text-align: -webkit-center;
     },
     logo:{
       width: '150px',
@@ -34,7 +47,10 @@ export const useStyles = makeStyles({
       width: "100%",
       background: "black",
       color: "white",
-      padding: "10px"
+      padding: "10px",
+      '&:hover': {
+        backgroundColor: theme.palette.primary.dark,
+      },
     },
     alingBox: {
       width: "100%",
@@ -58,4 +74,8 @@ export const useStyles = makeStyles({
         backgroundColor: 'rgba(255, 255, 255, 0.6)', 
       },
     },
-  });
+    formContainer: {
+      backgroundColor: "white",
+      padding:"20px"
+    }
+  }));

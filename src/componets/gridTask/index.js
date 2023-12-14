@@ -1,7 +1,7 @@
 import { Box, Button, Typography, makeStyles } from "@material-ui/core"
 import AddIcon from '@material-ui/icons/Add';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
     paddingTop10: {
         paddingTop: "10%",
     },
@@ -10,7 +10,8 @@ const useStyles = makeStyles({
         textAlign: 'center',
     },
     box: {
-        backgroundColor: "#E1E1E1"
+        backgroundColor: "#595959",
+        borderRadius: "14px"
     },
     height100: {
         height: "70vh"
@@ -20,14 +21,16 @@ const useStyles = makeStyles({
     }, 
     icon:{
         width: "50px",
-        height: "50px"
+        height: "50px",
+        color: "white"
     }, 
     fontStyle: {
         fontFamily: "Arial",
         fontSize: '1.5rem',
-       
-    }
-})
+        color: "white"
+    },
+    
+}))
 
 function GridTask({title, onHandleClick, task}){
     const classes = useStyles()
@@ -35,7 +38,7 @@ function GridTask({title, onHandleClick, task}){
     return(
         <>
            
-            <Box className={`${classes.box} `}>
+            <Box className={`${classes.box}`}>
                 <Typography className={`${classes.alingPaper} ${classes.box} ${classes.fontStyle}`}>{title}</Typography>
                 <Box>
                     {task}

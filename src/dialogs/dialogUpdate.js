@@ -13,7 +13,7 @@ const useStyles = makeStyles({
     },
     grid: {
         display: "grid",
-        gridTemplateColumns: "auto",
+        gridTemplateColumns: "90%",
         rowGap: "20px"
     }, 
     alignCenter: {
@@ -33,6 +33,9 @@ const useStyles = makeStyles({
     },
     padding20: {
         padding: "20px"
+    },
+    overflow: {
+        overflowX: "hidden !important"
     }
 })
 
@@ -77,16 +80,15 @@ function DialogUpdate(){
     }
 
     const handleSave = async () => {
-        console.log("dataaaaa ", dataLoader)
         const values = getValues()
         dispatch(closeDialog())
         await AlertYesNo({async onClickConfirm(){
             if(dataLoader === null){
+                //insert
                 await dispatch(insertTask(values, status))
-                console.log("inserir ")
             } else {
+                //update
                 await dispatch(updateStatusTasks(values, dataLoader))
-                console.log("update")
             }
             
             
@@ -104,9 +106,15 @@ function DialogUpdate(){
             maxWidth={"sm"}
             onClose={onClose}
             fullWidth={true}
+            style={{ overflowX: 'hidden' }}
+            PaperProps={{
+              style: {
+                overflowX: 'hidden',
+              },
+            }}
         >
-            <DialogTitle className={`${classes.alignCenter}`}>Editar tarefa</DialogTitle>
-            <DialogContent className={`${classes.width100}`}>
+            <DialogTitle className={`${classes.alignCenter}`}>Editar tarefas</DialogTitle>
+            <DialogContent className={`${classes.width100} ${classes.overflow}`}>
                 <HookFormProvider methods={methods}>
                     <Box className={`${classes.grid}`}>
                         <RHFTextField
