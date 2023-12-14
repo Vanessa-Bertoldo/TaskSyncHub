@@ -14,8 +14,12 @@ const useStyles = makeStyles((theme) => ({
         top: 0,  
     },
     paddingTop10: {
-        paddingTop: "10%",
-    },
+        paddingTop: "5%",
+        [theme.breakpoints.down('sm')]: {
+          paddingTop: "15%", 
+        },
+      },
+    
     alingPaper: {
         padding: 20, 
         textAlign: 'center',
@@ -42,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: "16px"
     },
     [theme.breakpoints.down('sm')]: {        
-        padding: "10px"
+        padding: "15px"
       },
     
 }))

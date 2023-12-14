@@ -67,17 +67,19 @@ export function emptyData(){
 
 export function updateStatusTasks(dto, dto2){
     return async (dispatch) => {
-        console.log("dataUpdate ", dto)
-        console.log("dataUpdate222 ", dto2)
+        //console.log("dataUpdate ", dto)
+        //console.log("dataUpdate222 ", dto2)
+        //console.log("dta log ", getDataLogin())
         const id = dto2 && dto2.id !== null && dto2.id !== "" ? dto2.id : dto.id
         const status =  dto2 && dto2.status !== null ? dto2.status : dto.status
         const newData = {
             id: id,
             title: dto.title,
             description: dto.description,
-            status: status
+            status: status,
+            user_id: getDataLogin().id
         }
-        console.log("new data ", newData)
+        
        await dispatch(updateTask(newData))
     }
 }

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Grid, IconButton, Menu, MenuItem, makeStyles } from "@material-ui/core";
+import { Grid, IconButton, Menu, MenuItem, Typography, makeStyles } from "@material-ui/core";
 import logo from "../../assets/taskHub.png";
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { useNavigate } from "react-router-dom";
@@ -24,6 +24,11 @@ const useStyles = makeStyles((theme) => ({
     height: "60px",
     maxWidth: "100%",
   },
+  title: {
+    color: "#fff",
+    fontSize: 30,
+    fontWeight: 'bold'
+  },
   menuButton: {
     color: "#fff",
   },
@@ -37,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
 function Header() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -47,23 +52,25 @@ function Header() {
     setAnchorEl(null);
   };
 
-  const handleOptionClick = async (option) => {
-    await AlertYesNo({async onClickConfirm(){
-        //setDataLogin(null)
-        navigate("/")
+  const handleOptionClick = async () => {
+    await AlertYesNo({
+      async onClickConfirm() {
+        navigate("/");
         handleClose();
-    }, onCancel(){
+      },
+      onCancel() {
         handleClose();
-    },
-    title: "Aviso",
-    text: "Deseja sair da aplicação?",
-    icon: "warning"})
-    
+      },
+      title: "Aviso",
+      text: "Deseja sair da aplicação?",
+      icon: "warning",
+    });
   };
 
   return (
     <div className={classes.header}>
       <img src={logo} className={classes.img} alt="Logo" />
+      <Typography className={classes.title}>Task Hub</Typography>
       <IconButton className={classes.menuButton} aria-controls="header-menu" aria-haspopup="true" onClick={handleClick}>
         <MoreVertIcon className={classes.icon} />
       </IconButton>
@@ -74,7 +81,7 @@ function Header() {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={() => handleOptionClick()}>Sair</MenuItem>
+        <MenuItem onClick={handleOptionClick}>Sair</MenuItem>
       </Menu>
     </div>
   );

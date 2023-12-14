@@ -58,38 +58,38 @@ function Login() {
   return (
     <Grid style={{ height: '100vh', width: '100vw' }} className={`${classes.background} ${classes.width100} `}>
       <Grid container style={{ height: '100vh', width: '100vw' }} className={`${classes.background} ${classes.width100}`}>
-  <Grid container justify="center" alignItems="center" className={`${classes.centerSquare} ${classes.width100}`}>
-    <Grid item xs={12} sm={8} md={6} lg={4}>
-      <div className={classes.centerSquare}>
-        <HookFormProvider methods={methods}>
-          <Box p={3} className={`${classes.width100} ${classes.formContainer}`}>
-            <Grid container direction="column" spacing={3} alignItems="center">
-              <Grid item xs={12}>
-                <img src={logo} alt="Logo" className={classes.logo} />
-              </Grid>
-              <Grid item className={classes.width100} xs={12}>
-                <RHFTextField name="email" label="Email" />
-              </Grid>
-              <Grid item className={classes.width100} xs={12}>
-                <RHFTextFieldPassword name="password" label="Senha"/>
-              </Grid>
-              <Grid item className={classes.width100} xs={12}>
-                <Button className={classes.button} fullWidth onClick={checkLogin}>
-                  LOGIN
-                </Button>
-              </Grid>
-              <Grid item style={{ zIndex: "1" }} xs={12}>
-                <Typography variant="body2">
-                  Não possui conta? <a href="/register">Registre-se</a>.
-                </Typography>
-              </Grid>
-            </Grid>
-          </Box>
-        </HookFormProvider>
-      </div>
-    </Grid>
-  </Grid>
-</Grid>
+        <Grid container justify="center" alignItems="center" className={`${classes.centerSquare} ${classes.width100}`}>
+          <Grid item xs={12} sm={8} md={6} lg={4}>
+            <div className={classes.centerSquare}>
+              <HookFormProvider methods={methods}>
+                <Box p={3} className={`${classes.width100} ${classes.formContainer}`}>
+                  <Grid container direction="column" spacing={3} alignItems="center">
+                    <Grid item xs={12}>
+                      <img src={logo} alt="Logo" className={classes.logo} />
+                    </Grid>
+                    <Grid item className={classes.width100} xs={12}>
+                      <RHFTextField name="email" label="Email" />
+                    </Grid>
+                    <Grid item className={classes.width100} xs={12}>
+                      <RHFTextFieldPassword name="password" label="Senha"/>
+                    </Grid>
+                    <Grid item className={classes.width100} xs={12}>
+                      <Button className={classes.button} fullWidth onClick={checkLogin}>
+                        LOGIN
+                      </Button>
+                    </Grid>
+                    <Grid item style={{ zIndex: "1" }} xs={12}>
+                      <Typography variant="body2">
+                        Não possui conta? <a href="/register">Registre-se</a>.
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                </Box>
+              </HookFormProvider>
+            </div>
+          </Grid>
+        </Grid>
+      </Grid>
   </Grid>
   );
 }

@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
       },
       customScrollbar: {
         '&::-webkit-scrollbar': {
-          width: '15px', 
+          width: '12px', 
         },
         '&::-webkit-scrollbar-thumb': {
           backgroundColor: "#262626", 
