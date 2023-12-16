@@ -1,3 +1,48 @@
+<p align="center">
+  <a href="https://react.dev/" target="blank"><img src="/assets/BannerTSH.png" width="320" alt="Banner Task Sync Hub" /></a>
+</p>
+
+<p>
+    The project is the frontend of a functional task list, with an interactive user interface
+</p>
+
+## Ferramentas usadas ⚒️
+<ul>
+    <li>NodeJS - version 20</li>
+    <li>React - version 17</li>
+    <li>React Router Dom</li>
+    <li>MaterialUI - version 4</li>
+    <li>Hook Forms</li>
+    <li>Redux Toolkit</li>
+    <li>Axios</li>
+
+</ul>
+
+## Visual presentation
+
+### Registration screen
+<p align="center">
+  <a href="https://react.dev/" target="blank"><img src="/assets/screenRegister.jpeg" width="320" alt="Tela de registro" /></a>
+</p>
+
+### Login screen
+
+<p align="center">
+  <a href="https://react.dev/" target="blank"><img src="/assets/screenLogin.jpeg" width="320" alt="Tela de login" /></a>
+</p>
+
+### Initial screen
+
+<p align="center">
+  <a href="https://react.dev/" target="blank"><img src="/assets/screenPageInitial.jpeg" width="320" alt="Pagina inicial" /></a>
+</p>
+
+## Registering/editing a task
+
+<p align="center">
+  <a href="https://react.dev/" target="blank"><img src="/assets/screenReg.jpeg" width="320" alt="Pagina de edição/inserção de tarefas" /></a>
+</p>
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
